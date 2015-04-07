@@ -49,6 +49,11 @@
      <Compile Include="Assets\Scripts\CarController.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\PlayerCar.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\UI_Menu.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\UI_PauseMenu.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\UI_Return.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\UI_Score.cs" />
+     <Compile Include="Assets\Scripts\UI Scripts\UI_Timer.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
