@@ -4,11 +4,13 @@ using System.Collections;
 public class CarController : MonoBehaviour {
 
     public PlayerCar Player;
+	private Rigidbody r;
 
     GameController Game = new GameController();
 
 	// Use this for initialization
 	void Start () {
+		r = GetComponent<Rigidbody> ();
         Player = Game.CreateNewPlayer();
 	
 	}
@@ -22,21 +24,19 @@ public class CarController : MonoBehaviour {
 
     void DoPlayerMovement()
     {
-        if(Input.GetKey(KeyCode.Space))
-        {
+		if (Input.GetKey (KeyCode.Space)) {
             
-            Accelerate();
+			Accelerate ();
 
-        }
+		} else {
+			Deccelerate ();
+		}
 
-        else
-        {
-            Deccelerate();
-        }
+		//Player.PlayerPos.x += Player.PlayerSpeed;
 
-        Player.PlayerPos.x += Player.PlayerSpeed;
+		//this.transform.position = Player.PlayerPos;
 
-        this.transform.position = Player.PlayerPos;
+		///better to use Rigidbody AddForce instead, works better on the ramp (JC);
 
     }
 
@@ -45,7 +45,8 @@ public class CarController : MonoBehaviour {
 
         print("Accelerating");
 
-        Player.PlayerSpeed = Player.PlayerSpeed += Time.deltaTime; 
+		r.AddForce (Vector3.right * 50 * Time.deltaTime, ForceMode.Impulse);
+        //Player.PlayerSpeed = Player.PlayerSpeed += Time.deltaTime; 
     }
     
     void Deccelerate()
@@ -54,7 +55,8 @@ public class CarController : MonoBehaviour {
         {
             print("Decelerating");
 
-            Player.PlayerSpeed -= Time.deltaTime;
+			r.AddForce (Vector3.left * 50 * Time.deltaTime, ForceMode.Acceleration);
+            //Player.PlayerSpeed -= Time.deltaTime;
         }
         
     }
