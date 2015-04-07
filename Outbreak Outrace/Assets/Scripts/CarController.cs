@@ -4,13 +4,13 @@ using System.Collections;
 public class CarController : MonoBehaviour {
 
     public PlayerCar Player;
-	private Rigidbody r;
+	Rigidbody RigBody;
 
     GameController Game = new GameController();
 
 	// Use this for initialization
 	void Start () {
-		r = GetComponent<Rigidbody> ();
+        RigBody = GetComponent<Rigidbody>();
         Player = Game.CreateNewPlayer();
 	
 	}
@@ -24,11 +24,13 @@ public class CarController : MonoBehaviour {
 
     void DoPlayerMovement()
     {
-		if (Input.GetKey (KeyCode.Space)) {
+		if (Input.GetKey(KeyCode.Space)) {
             
 			Accelerate ();
 
-		} else {
+		} 
+        else 
+        {
 			Deccelerate ();
 		}
 
@@ -44,9 +46,10 @@ public class CarController : MonoBehaviour {
     {
 
         print("Accelerating");
+        Player.PlayerSpeed = Player.PlayerSpeed += Time.deltaTime; 
 
-		r.AddForce (Vector3.right * 50 * Time.deltaTime, ForceMode.Impulse);
-        //Player.PlayerSpeed = Player.PlayerSpeed += Time.deltaTime; 
+        RigBody.AddForce(Vector3.right * 20 * Player.PlayerSpeed, ForceMode.Impulse);
+        
     }
     
     void Deccelerate()
@@ -54,9 +57,10 @@ public class CarController : MonoBehaviour {
         if(Player.PlayerSpeed > 0)
         {
             print("Decelerating");
+            Player.PlayerSpeed -= Time.deltaTime;
 
-			r.AddForce (Vector3.left * 50 * Time.deltaTime, ForceMode.Acceleration);
-            //Player.PlayerSpeed -= Time.deltaTime;
+            RigBody.AddForce(Vector3.left * 20 * Player.PlayerSpeed, ForceMode.Acceleration);
+            
         }
         
     }
