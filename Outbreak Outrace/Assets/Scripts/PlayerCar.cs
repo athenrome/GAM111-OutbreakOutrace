@@ -9,9 +9,11 @@ public class PlayerCar : MonoBehaviour {
     public int PlayerArmour;
     public Vector2 PlayerPos;
     public float PlayerSpeed;
+    public bool SpikesActive;
+    public bool NitroActive;
 
 	
-	public PlayerCar(string Pn, int Ps, int Ph, int Pa, Vector2 Position, float Pspeed) 
+	public PlayerCar(string Pn, int Ps, int Ph, int Pa, Vector2 Position, float Pspeed, bool Sa, bool Na) 
     {
         PlayerName = Pn;
         PlayerScore = Ps;

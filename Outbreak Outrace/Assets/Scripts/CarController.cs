@@ -10,8 +10,10 @@ public class CarController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         RigBody = GetComponent<Rigidbody>();
         Player = Game.CreateNewPlayer();
+        this.name = Player.PlayerName;
 	
 	}
 	

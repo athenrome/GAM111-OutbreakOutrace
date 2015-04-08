@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PowerupController.cs" />
      <Compile Include="Assets\Script\CameraFollows.cs" />
      <Compile Include="Assets\Script\CarControl.cs" />
      <Compile Include="Assets\Scripts\CarController.cs" />
