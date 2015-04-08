@@ -12,15 +12,17 @@ public class CarControl : MonoBehaviour {
 	public Transform[] wheels;
 	public float jumpHeight, carHealth, carAr;
 	public bool haveSpike;
+	public Camera viewPortManipu;
 
-	private float speed, mouseMovedOff, slowed, score, kms, nitrate;
+	private float speed, mouseMovedOff, slowed, score, kms, nitrate, carToGrondDis;
 	private Vector2 mouseOri, movedMouse;
-	private RaycastHit2D isFloored;
+	private RaycastHit2D isFloored, AirToGroundRC;
 	private int spikeSpateEndu, niGas;
 	private Vector3 carOriRot;
 
 	// Use this for initialization
 	void Start () {
+		carToGrondDis = 0;
 		niGas = 1;
 		carOriRot = transform.localEulerAngles;
 		mouseOri = Camera.main.ScreenToViewportPoint (Input.mousePosition);
@@ -46,8 +48,7 @@ public class CarControl : MonoBehaviour {
 				//The car can only jumps when is moving
 				if (Input.GetMouseButtonDown(0)) {
 					isFloored = Physics2D.Raycast(transform.position, Vector2.up, -2, 
-					                              1 << LayerMask.NameToLayer("Road")); //Check to see if the car is grounded.
-					Debug.Log(isFloored.collider);
+					                            1 << LayerMask.NameToLayer("Road")); //Check to see if the car is grounded.
 
 					if (isFloored.collider != null) {
 						backWheel.AddRelativeForce(Vector2.up * jumpHeight, ForceMode2D.Impulse); //makes the car jump
@@ -133,13 +134,16 @@ public class CarControl : MonoBehaviour {
 			break;
 		case "Backpack":
 			score += 200;
+			DisplayHealthScore(carHealth, carAr, score);
 			break;
 		case "Nitros":
 			niGas++;
+			DisplayHealthScore(carHealth, carAr, score);
 			break;
 		case "Spike":
 			spikeSpateEndu = 10;
 			haveSpike = true;
+			DisplayHealthScore(carHealth, carAr, score);
 			break;
 		case "Armor":
 			carAr = 500;
@@ -148,8 +152,22 @@ public class CarControl : MonoBehaviour {
 		}
 	}
 
+	void LateUpdate() {
+		//For air to ground calculation
+		AirToGroundRC = Physics2D.Raycast(transform.position, Vector2.up, -100, 
+		                                  1 << LayerMask.NameToLayer("Road"));
+		carToGrondDis = Vector2.Distance (transform.position, AirToGroundRC.point);
+		Debug.Log (AirToGroundRC.point);
+		viewPortManipu.orthographicSize = carToGrondDis + 10; //More zoomed out when the car is air travelling.
+		
+		//to prevent over zooming
+		if (viewPortManipu.orthographicSize > 25) {
+			viewPortManipu.orthographicSize = 20;
+		}
+	}
+
 	void DisplayHealthScore (float h, float a, float s) {
 		carHealthDis.text = "health: " + h.ToString () + "\n Scrap Metal: " + a.ToString () 
-			+ "\n Exp: " + s.ToString() + "\n SP: " + spikeSpateEndu.ToString();
+			+ "\n Exp: " + s.ToString () + "\n SP: " + spikeSpateEndu.ToString () + "\n current Gas meter: " + nitrate.ToString ();
 	}
 }
