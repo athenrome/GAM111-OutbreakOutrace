@@ -2,10 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\CarControl.cs">
     <Files>
-      <File FileName="Outbreak Outrace.sln" Line="41" Column="1" />
-      <File FileName="Assets\Script\CarControl.cs" Line="23" Column="36" />
-      <File FileName="Assets\PowerupController.cs" Line="18" Column="2" />
-      <File FileName="Assets\Scripts\CarController.cs" Line="51" Column="1" />
+      <File FileName="Assets\Scripts\CarController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\CarControl.cs" Line="50" Column="34" />
+      <File FileName="Assets\Script\PickupInterraction.cs" Line="88" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
